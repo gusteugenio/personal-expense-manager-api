@@ -2,12 +2,13 @@
 
 namespace app\services;
 
+use app\interfaces\AuthServiceInterface;
 use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\User;
 use Yii;
 
-class AuthService
+class AuthService implements AuthServiceInterface
 {
   public function register(SignupForm $form): User
   {

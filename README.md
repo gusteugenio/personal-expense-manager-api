@@ -227,7 +227,6 @@ Novas regras podem ser adicionadas na camada de Services sem alterar os Controll
 Exemplos:
 
 - Inclusão de novos filtros.
-- Inclusão de novas categorias.
 - Novas regras de autorização.
 
 ### Liskov Substitution Principle (LSP)
@@ -246,7 +245,6 @@ As responsabilidades são divididas em Services específicos, evitando classes e
 Exemplos:
 
 - AuthService
-- UserService
 - ExpenseService
 
 ### Dependency Inversion Principle (DIP)

@@ -2,11 +2,12 @@
 
 namespace app\services;
 
+use app\interfaces\ExpenseServiceInterface;
 use app\models\Expense;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
-class ExpenseService
+class ExpenseService implements ExpenseServiceInterface
 {
   public function create(int $userId, array $attributes): Expense
   {

@@ -2,17 +2,28 @@
 
 namespace app\controllers;
 
-use app\services\ExpenseService;
+use app\interfaces\ExpenseServiceInterface;
 use Yii;
 
 class ExpenseController extends SecuredController
 {
-  private ExpenseService $expenseService;
+  private ExpenseServiceInterface $expenseService;
 
-  public function __construct($id, $module, ExpenseService $expenseService, $config = [])
+  public function __construct($id, $module, ExpenseServiceInterface $expenseService, $config = [])
   {
     $this->expenseService = $expenseService;
     parent::__construct($id, $module, $config);
+  }
+
+  public function verbs()
+  {
+    return [
+      'index'  => ['GET'],
+      'view'   => ['GET'],
+      'create' => ['POST'],
+      'update' => ['PUT', 'PATCH'],
+      'delete' => ['DELETE'],
+    ];
   }
 
   public function actionIndex()
