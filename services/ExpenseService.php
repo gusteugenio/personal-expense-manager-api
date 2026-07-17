@@ -4,6 +4,8 @@ namespace app\services;
 
 use app\interfaces\ExpenseServiceInterface;
 use app\models\Expense;
+use app\models\ExpenseFilter;
+use yii\data\ActiveDataProvider;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -19,9 +21,28 @@ class ExpenseService implements ExpenseServiceInterface
     return $expense;
   }
 
-  public function listByUser(int $userId): array
+  public function listByUser(int $userId, ExpenseFilter $filter): ActiveDataProvider
   {
-    return Expense::find()->where(['user_id' => $userId])->all();
+    $query = Expense::find()->where(['user_id' => $userId]);
+
+    if ($filter->category) {
+      $query->andWhere(['category' => $filter->category]);
+    }
+
+    if ($filter->hasPeriod()) {
+      $query->andWhere(['between', 'expense_date', $filter->periodStart(), $filter->periodEnd()]);
+    }
+
+    $query->orderBy(['expense_date' => $filter->sort === 'asc' ? SORT_ASC : SORT_DESC]);
+
+    return new ActiveDataProvider([
+      'query' => $query,
+      'sort' => false,
+      'pagination' => [
+        'page' => $filter->page - 1,
+        'pageSize' => $filter->per_page,
+      ],
+    ]);
   }
 
   public function findOwned(int $id, int $userId): Expense
