@@ -39,18 +39,19 @@ jobs:
 
       - name: Configura variaveis de ambiente
         run: |
-          echo "YII_ENV=test" >> .env
-          echo "YII_DEBUG=true" >> .env
-          echo "APP_PORT=8080" >> .env
-          echo "DB_HOST=127.0.0.1" >> .env
-          echo "DB_PORT=3306" >> .env
-          echo "DB_HOST_PORT=3307" >> .env
-          echo "DB_DATABASE=expense_manager" >> .env
-          echo "DB_USERNAME=expense_user" >> .env
-          echo "DB_PASSWORD=expense_password" >> .env
-          echo "DB_ROOT_PASSWORD=root_password" >> .env
-          echo "JWT_SECRET=chave-secreta-jwt-com-pelo-menos-32-caracteres" >> .env
-          echo "COOKIE_VALIDATION_KEY=chave-secreta-cookie" >> .env
+          {
+            echo "YII_ENV=test"
+            echo "YII_DEBUG=true"
+            echo "APP_PORT=8080"
+            echo "DB_HOST=127.0.0.1"
+            echo "DB_PORT=3306"
+            echo "DB_DATABASE=expense_manager"
+            echo "DB_USERNAME=expense_user"
+            echo "DB_PASSWORD=expense_password"
+            echo "DB_ROOT_PASSWORD=root_password"
+            echo "JWT_SECRET=chave-secreta-jwt-com-pelo-menos-32-caracteres"
+            echo "COOKIE_VALIDATION_KEY=chave-secreta-cookie"
+          } | tee -a .env >> "$GITHUB_ENV"
 
       - name: Aguarda o banco de dados
         run: |
