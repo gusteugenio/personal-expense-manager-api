@@ -351,10 +351,10 @@ A variável `base_url` já acompanha a coleção.
 
 ### Autenticação
 
-- [ ] Cadastro
-- [ ] Login
-- [ ] JWT
-- [ ] Proteção dos endpoints
+- [x] Cadastro
+- [x] Login
+- [x] JWT
+- [x] Proteção dos endpoints
 
 ### Despesas
 
