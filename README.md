@@ -290,35 +290,28 @@ O documento contém:
 
 ## Testes
 
-Os testes automatizados utilizam Codeception e cobrem os principais fluxos da aplicação.
+Os testes automatizados utilizam Codeception (suíte funcional, via módulo Yii2 + REST) e cobrem os principais fluxos da aplicação.
 
 ### Cobertura
 
-- Cadastro de usuários
-- Login
-- Autenticação
-- Cadastro de despesas
-- Atualização de despesas
-- Exclusão de despesas
-- Consulta por ID
-- Listagem de despesas
-- Filtros
-- Paginação
-- Regras de autorização
+- Cadastro de usuários, incluindo todas as regras de senha e e-mail
+- Login com credenciais válidas e inválidas
+- Acesso a endpoints protegidos sem token e com token inválido
+- CRUD completo de despesas, incluindo todas as validações de campo
+- Filtros por categoria e período (incluindo período parcial, que deve falhar)
+- Ordenação e paginação
+- Regras de autorização (usuário só acessa suas próprias despesas)
 
 ### Como executar os testes
 
-Execute toda a suíte de testes.
-
 ```bash
-> @todo Atualizar comando para rodar testes.
-
-vendor/bin/codecept run
+docker compose exec app vendor/bin/codecept build
+docker compose exec app vendor/bin/codecept run Functional
 ```
 
 ### Integração contínua
 
-O pipeline configurado no GitHub Actions executa automaticamente a suíte de testes a cada push ou pull request.
+O pipeline configurado no GitHub Actions executa automaticamente a suíte de testes a cada push ou pull request na branch `main`.
 
 ## Coleção Postman
 
@@ -375,12 +368,12 @@ A variável `base_url` já acompanha a coleção.
 
 ### Qualidade
 
-- [ ] Tratamento de erros
-- [ ] Testes automatizados
+- [x] Tratamento de erros
+- [x] Testes automatizados
 
 ### DevOps
 
-- [ ] GitHub Actions
+- [x] GitHub Actions
 - [ ] Deploy no Railway
 - [ ] Banco MySQL no Railway
 
