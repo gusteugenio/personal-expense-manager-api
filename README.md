@@ -58,14 +58,13 @@ cp .env.example .env
 
 ### Executando
 
-Inicialize toda a aplicação, incluindo banco de dados, migrations e seed.
+Inicialize toda a aplicação, incluindo banco de dados e migrations.
 
 ```bash
 docker compose up --build
 ```
 
-O ambiente é inicializado automaticamente com a aplicação, banco de dados e carga dos dados iniciais.
-
+O ambiente é inicializado automaticamente com a aplicação, banco de dados e migrations aplicadas. Na primeira execução, as dependências do Composer também são instaladas automaticamente pelo entrypoint.
 
 Após a inicialização:
 
@@ -150,18 +149,21 @@ B --> F[JSON Response]
 ## Estrutura de pastas
 
 ```text
-@todo
-Revisar estrutura definitiva após conclusão da implementação.
-
 commands/
 components/
 config/
 controllers/
-migrations/
+docker/
+interfaces/
+migrations/ 
 models/
-runtime/
 services/
 tests/
+web/    
+Dockerfile
+docker-compose.yml
+API.md
+README.md
 ```
 
 ## Modelo de domínio
@@ -274,12 +276,10 @@ Os Controllers dependem apenas da camada de Services para executar as operaçõe
 
 A API está disponível no Railway utilizando um banco de dados MySQL hospedado na própria plataforma.
 
-| Serviço | Plataforma |
-|---|---|
-| API | Railway |
-| Banco de dados MySQL | Railway |
-
-> @todo Atualizar URL após o deploy.
+| Serviço | Plataforma | URL |
+|---|---|---|
+| API | Railway | https://personal-expense-manager-api-production.up.railway.app |
+| Banco de dados MySQL | Railway | (rede privada interna) |
 
 ## Documentação da API
 
@@ -323,14 +323,16 @@ O pipeline configurado no GitHub Actions executa automaticamente a suíte de tes
 
 ## Coleção Postman
 
-O projeto acompanha uma coleção do Postman contendo todos os endpoints disponíveis na API, permitindo testar todas as funcionalidades da aplicação.
+O projeto acompanha uma coleção do Postman contendo todos os endpoints disponíveis na API, disponível em [`postman/personal-expense-manager-api.postman_collection.json`](./postman/personal-expense-manager-api.postman_collection.json).
 
-A variável `base_url` já acompanha a coleção.
+A coleção resolve a `base_url` automaticamente por meio de um script de pré-requisição, com base na variável de coleção `ambiente`:
 
-| Ambiente | URL |
+| Valor de `ambiente` | URL resolvida |
 |---|---|
-| Local | http://localhost:8080 |
-| Produção | @todo Atualizar URL após o deploy no Railway |
+| `local` (padrão) | http://localhost:8080 |
+| `prod` | https://personal-expense-manager-api-production.up.railway.app |
+
+Basta importar a coleção no Postman e, na aba **Variables** da coleção, alterar o valor de `ambiente` para `local` ou `prod` — todos os endpoints passam a apontar para a URL correta automaticamente, sem precisar editar cada requisição.
 
 ## Checklist de desenvolvimento
 
@@ -382,14 +384,14 @@ A variável `base_url` já acompanha a coleção.
 ### DevOps
 
 - [x] GitHub Actions
-- [ ] Deploy no Railway
-- [ ] Banco MySQL no Railway
+- [x] Deploy no Railway
+- [x] Banco MySQL no Railway
 
 ### Documentação
 
-- [ ] README
-- [ ] API.md
-- [ ] Coleção Postman
+- [x] README
+- [x] API.md
+- [x] Coleção Postman
 
 ## Contato
 
