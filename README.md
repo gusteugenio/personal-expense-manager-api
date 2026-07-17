@@ -305,6 +305,7 @@ Os testes automatizados utilizam Codeception (suíte funcional, via módulo Yii2
 ### Como executar os testes
 
 ```bash
+docker compose exec app vendor/bin/codecept build
 docker compose exec app vendor/bin/codecept run Functional
 ```
 
