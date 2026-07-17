@@ -23,4 +23,9 @@ PORT="${PORT:-80}"
 sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
 sed -i "s/:80/:${PORT}/" /etc/apache2/sites-available/000-default.conf
 
+a2dismod mpm_event mpm_worker || true
+rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.*
+a2enmod mpm_prefork
+apache2ctl -t
+
 exec apache2-foreground
