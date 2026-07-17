@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
 
-# Garante permissões de escrita mesmo com o volume montado por cima da imagem
 mkdir -p /var/www/html/runtime/logs /var/www/html/web/assets
 chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets
 chmod -R 775 /var/www/html/runtime /var/www/html/web/assets
 
-# Aguarda o banco de dados aceitar conexoes antes de continuar
 until php -r "
 require '/var/www/html/vendor/autoload.php';
 try {
@@ -20,6 +18,9 @@ try {
 done
 
 php /var/www/html/yii migrate --interactive=0
-php /var/www/html/yii seed
+
+PORT="${PORT:-80}"
+sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
+sed -i "s/:80/:${PORT}/" /etc/apache2/sites-available/000-default.conf
 
 exec apache2-foreground
