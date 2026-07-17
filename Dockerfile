@@ -17,7 +17,8 @@ RUN composer install --optimize-autoloader --no-interaction
 
 # Aponta o Apache para a pasta web/ do Yii2
 RUN sed -i 's#/var/www/html#/var/www/html/web#' /etc/apache2/sites-available/000-default.conf \
-  && sed -i 's#/var/www/#/var/www/html/web/#' /etc/apache2/apache2.conf
+  && sed -i 's#/var/www/#/var/www/html/web/#' /etc/apache2/apache2.conf \
+  && printf '<Directory /var/www/html/web>\n    AllowOverride All\n</Directory>\n' >> /etc/apache2/apache2.conf
 
 RUN mkdir -p /var/www/html/runtime /var/www/html/web/assets \
   && chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets

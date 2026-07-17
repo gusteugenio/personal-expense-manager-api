@@ -1,5 +1,4 @@
 <?php
-// config/web.php
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -26,6 +25,10 @@ $config = [
     ],
     'cache' => [
       'class' => 'yii\caching\FileCache',
+    ],
+    'jwt' => [
+      'class' => 'app\components\JwtService',
+      'secret' => getenv('JWT_SECRET'),
     ],
     'log' => [
       'traceLevel' => YII_DEBUG ? 3 : 0,
