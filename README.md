@@ -64,7 +64,7 @@ Inicialize toda a aplicação, incluindo banco de dados, migrations e seed.
 docker compose up --build
 ```
 
-O ambiente é inicializado automaticamente com a aplicação, banco de dados, execução das migrations e carga dos dados iniciais.
+O ambiente é inicializado automaticamente com a aplicação, banco de dados e carga dos dados iniciais.
 
 
 Após a inicialização:
@@ -72,6 +72,14 @@ Após a inicialização:
 | Serviço | URL |
 |---|---|
 | API | http://localhost:8080 |
+
+Após subir o ambiente, popule o banco com dados de exemplo (usuários e despesas fictícias):
+
+```bash
+docker compose exec app php yii seed
+```
+
+> Esse comando não roda automaticamente. Ele apaga e recria os dados de `users` e `expenses`, então use apenas em ambiente local.
 
 ## Dados para teste
 
