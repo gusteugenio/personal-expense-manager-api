@@ -17,7 +17,7 @@ class AuthService implements AuthServiceInterface
     $user->setPassword($form->password);
     $user->created_at = date('Y-m-d H:i:s');
     $user->updated_at = date('Y-m-d H:i:s');
-    $user->save(false);
+    $user->save();
 
     return $user;
   }
