@@ -358,15 +358,15 @@ A variável `base_url` já acompanha a coleção.
 
 ### Despesas
 
-- [ ] Model de Despesa
-- [ ] Service de Despesas
-- [ ] Controller de Despesas
-- [ ] Validações
-- [ ] Criar
-- [ ] Consultar
-- [ ] Listar
-- [ ] Atualizar
-- [ ] Excluir
+- [x] Model de Despesa
+- [x] Service de Despesas
+- [x] Controller de Despesas
+- [x] Validações
+- [x] Criar
+- [x] Consultar
+- [x] Listar
+- [x] Atualizar
+- [x] Excluir
 
 ### Funcionalidades
 

@@ -12,10 +12,11 @@ class AuthController extends Controller
 {
   private AuthService $authService;
 
-  public function init()
+  public function __construct($id, $module, AuthService $authService, $config = [])
   {
-    parent::init();
-    $this->authService = new AuthService();
+    $this->authService = $authService;
+    parent::__construct($id, $module, $config);
+
   }
 
   public function verbs()
