@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+if [ ! -f /var/www/html/vendor/autoload.php ]; then
+  echo "Instalando dependencias do composer..."
+  composer install --optimize-autoloader --no-interaction
+fi
+
 mkdir -p /var/www/html/runtime/logs /var/www/html/web/assets
 chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets
 chmod -R 775 /var/www/html/runtime /var/www/html/web/assets
