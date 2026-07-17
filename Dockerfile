@@ -22,4 +22,8 @@ RUN sed -i 's#/var/www/html#/var/www/html/web#' /etc/apache2/sites-available/000
 RUN mkdir -p /var/www/html/runtime /var/www/html/web/assets \
   && chown -R www-data:www-data /var/www/html/runtime /var/www/html/web/assets
 
+RUN chmod +x docker/entrypoint.sh
+
 EXPOSE 80
+
+ENTRYPOINT ["docker/entrypoint.sh"]

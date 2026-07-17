@@ -343,11 +343,11 @@ A variável `base_url` já acompanha a coleção.
 
 ### Banco de dados
 
-- [ ] Migrations
-- [ ] Relacionamentos
-- [ ] Índices
-- [ ] Seed de usuários
-- [ ] Seed de despesas
+- [x] Migrations
+- [x] Relacionamentos
+- [x] Índices
+- [x] Seed de usuários
+- [x] Seed de despesas
 
 ### Autenticação
 
