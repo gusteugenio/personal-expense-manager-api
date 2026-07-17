@@ -368,10 +368,10 @@ A variável `base_url` já acompanha a coleção.
 
 ### Funcionalidades
 
-- [ ] Filtro por categoria
-- [ ] Filtro por período
-- [ ] Ordenação por data
-- [ ] Paginação
+- [x] Filtro por categoria
+- [x] Filtro por período
+- [x] Ordenação por data
+- [x] Paginação
 
 ### Qualidade
 

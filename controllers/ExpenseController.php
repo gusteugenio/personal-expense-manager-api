@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\interfaces\ExpenseServiceInterface;
+use app\models\ExpenseFilter;
 use Yii;
 
 class ExpenseController extends SecuredController
@@ -28,7 +29,25 @@ class ExpenseController extends SecuredController
 
   public function actionIndex()
   {
-    return $this->expenseService->listByUser((int) Yii::$app->user->id);
+    $filter = new ExpenseFilter();
+    $filter->load(Yii::$app->request->queryParams, '');
+
+    if (!$filter->validate()) {
+      Yii::$app->response->statusCode = 422;
+      return $filter->errors;
+    }
+
+    $dataProvider = $this->expenseService->listByUser((int) Yii::$app->user->id, $filter);
+
+    return [
+      'items' => $dataProvider->getModels(),
+      'pagination' => [
+        'total' => $dataProvider->getTotalCount(),
+        'page' => $filter->page,
+        'per_page' => $filter->per_page,
+        'total_pages' => $dataProvider->pagination->pageCount,
+      ],
+    ];
   }
 
   public function actionView($id)
