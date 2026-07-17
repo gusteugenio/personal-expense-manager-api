@@ -70,4 +70,4 @@ jobs:
         run: vendor/bin/codecept build
 
       - name: Roda testes
-        run: vendor/bin/codecept run functional
+        run: vendor/bin/codecept run Functional
