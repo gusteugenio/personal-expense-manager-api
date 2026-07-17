@@ -7,6 +7,12 @@ $config = [
   'id' => 'expense-manager',
   'basePath' => dirname(__DIR__),
   'bootstrap' => ['log'],
+  'container' => [
+    'definitions' => [
+      \app\interfaces\AuthServiceInterface::class => \app\services\AuthService::class,
+      \app\interfaces\ExpenseServiceInterface::class => \app\services\ExpenseService::class,
+    ],
+  ],
   'components' => [
     'request' => [
       'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY'),

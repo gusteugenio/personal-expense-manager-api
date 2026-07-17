@@ -2,21 +2,20 @@
 
 namespace app\controllers;
 
+use app\interfaces\AuthServiceInterface;
 use app\models\LoginForm;
 use app\models\SignupForm;
-use app\services\AuthService;
 use Yii;
 use yii\rest\Controller;
 
 class AuthController extends Controller
 {
-  private AuthService $authService;
+  private AuthServiceInterface $authService;
 
-  public function __construct($id, $module, AuthService $authService, $config = [])
+  public function __construct($id, $module, AuthServiceInterface $authService, $config = [])
   {
     $this->authService = $authService;
     parent::__construct($id, $module, $config);
-
   }
 
   public function verbs()
